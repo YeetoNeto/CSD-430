@@ -9,6 +9,8 @@
 <title>Favorite Movies</title>
 </head>
 <body>
+<a href="AddMovie.jsp">Want to add a movie? Click Me!</a>
+
 <h1>A list of my some of my favorite movies</h1>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="beanRead.ReadingBeans" %>
