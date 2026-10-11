@@ -9,23 +9,17 @@
 <title>Favorite Movies</title>
 </head>
 <body>
+
 <h1>A list of my some of my favorite movies</h1>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="beanRead.ReadingBeans" %>
 <%
  ArrayList<ReadingBeans> movieData = dataBean.getMovieData();
- Integer[] Id = new Integer[movieData.size()];
- String[] Movie = new String[movieData.size()];
- String[] Genre = new String[movieData.size()];
- Integer[] Year = new Integer[movieData.size()];
- Integer[] Tomatometer = new Integer[movieData.size()];
- for (int i = 0; i < movieData.size(); i++) {
-	 Id[i] = movieData.get(i).getMovieId();
-	 Movie[i] = movieData.get(i).getMovie();
-	 Genre[i] = movieData.get(i).getGenre();
-	 Year[i] = movieData.get(i).getYear();
-	 Tomatometer[i] = movieData.get(i).getTomato();
- }
+ Integer Id = null;
+ String Movie = null;
+ String Genre = null;
+ Integer Year = null;
+ Integer Tomatometer = null;
  String selection = null;
 %>
 <form method="post">
@@ -34,9 +28,9 @@
 <select id="movieSelect" name="movieSelect">
 
 <% 
-	for  (int i = 0; i < Id.length; i++) { 
+	for  (int i = 0; i < movieData.size(); i++) { 
 %>
-	<option value= "<%=Id[i]%>" > <%=Id[i]%> </option>
+	<option value= "<%=movieData.get(i).getMovieId()%>" > <%=movieData.get(i).getMovieId()%> </option>
 <%
     }
 %>
@@ -47,8 +41,17 @@
 selection = request.getParameter("movieSelect");
 
 if (selection != null) {
-    int select = Integer.parseInt(selection)-1;
-
+    int select = Integer.parseInt(selection);
+    for( int i = 0; i < movieData.size(); i++) {
+		if (movieData.get(i).getMovieId() == select) {
+			Id = movieData.get(i).getMovieId();
+			Movie = movieData.get(i).getMovie();
+			Genre = movieData.get(i).getGenre();
+			Year = movieData.get(i).getYear();
+			Tomatometer = movieData.get(i).getTomato();
+			break;
+		}
+		}
 %>
 <table>
 <tr>
@@ -59,16 +62,16 @@ if (selection != null) {
 <th>Tomatometer</th>
 </tr>
 		<tr>
-		    <td><%= select + 1 %></td>
-			<td><%= Movie[select] %></td>
-			<td><%= Genre[select] %></td>
-			<td><%= Year[select] %></td>
-			<td><%= Tomatometer[select] + "%" %></td>
+		    <td><%= Id %></td>
+			<td><%= Movie %></td>
+			<td><%= Genre %></td>
+			<td><%= Year %></td>
+			<td><%= Tomatometer + "%" %></td>
 		</tr>
 
 <% 
 }
-%>		
+%>
 	
 </table>
 </body>

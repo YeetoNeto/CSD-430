@@ -25,6 +25,7 @@ public class beanMain {
 				ReadingBeans readingBean = new ReadingBeans(rs.getInt("MovieID"), rs.getString("Title"), rs.getString("Genre"), rs.getInt("Released"), rs.getInt("Tomatoes"));
 				movieData.add(readingBean);
 			}
+			conn.close();
 		} catch (ClassNotFoundException e) {
 		    e.printStackTrace();
 		} catch (SQLException e) {
@@ -36,6 +37,8 @@ public class beanMain {
 	public ArrayList<ReadingBeans> getMovieData() {
 	        return movieData;
 	}
+	
+	
 		
 }
 
